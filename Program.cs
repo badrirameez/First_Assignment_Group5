@@ -58,7 +58,7 @@ namespace First_Assignment_Group5
             Console.WriteLine("Enter the number of elements in the array"); 
             int nStab = Convert.ToInt32(Console.ReadLine()); //Getting the size of the integer array.
             int sumNumArrayStab = 0; //Initializing sum of the array elements as zero.
-            bool cheat = false; //Variable to check if the array is in ascending order.
+            bool cheat = false;
             if (nStab < 2) // Specifying condition to enter at least 2 number in the array.
             {
                 Console.WriteLine("Minimum array length should be geater than or equal to 2.");
@@ -83,46 +83,13 @@ namespace First_Assignment_Group5
                     Console.WriteLine("The number in old array at position " + i + " is " + numberArrayStab[i]);
 
                 }
-                sumNumArrayStab = numberArrayStab[0];
-                for (int i = 1; i < nStab; i++) //For loop to traverse all elements of the array 
-                {
-                    if (numberArrayStab[i] < numberArrayStab[i - 1]) //Check if array is in ascending order
-                    {
-                        cheat = true;
-                        break;
-                    }
-                    else
-                    { 
-                    if (numberArrayStab[i] == numberArrayStab[i - 1]) //check if the current number in array is same as the previous number
-                        {
-                        int j = i;
-                        while (j < nStab && numberArrayStab[j] <= numberArrayStab[j - 1]) // for each number in the array check if it is less than or equal to the previous number, if yes, then increment the current number by one to make it next in sequence
-                        {
-                            numberArrayStab[j] = numberArrayStab[j] + 1; //Increment the number in array if it is same as the previous number
-                            j++;
-                        }
-                      
-                    }                      
-                    }
-                    sumNumArrayStab += numberArrayStab[i]; //Find sum of the new array
-                }
 
-                if (cheat)
+                cheat=minSum(numberArrayStab, nStab); //Method to make the array elements distinct by increasing each value as needed and find the sum
+                if (cheat) 
                 {
                     Console.WriteLine("\nYou tried to cheat, your array is not sorted in ascending order."); //Display if the array is not in ascending order.
                 }
-                else 
-                {
-                    Console.WriteLine("\n\n");
-                    for (int i = 0; i < nStab; i++) //For loop to display all numbers in the updated array along with their position in the array.
-                    {
-                        Console.WriteLine("The number in new array at position " + i + " is " + numberArrayStab[i]);
 
-                    }
-                    Console.WriteLine("\n\nThe sum of the array elemets is " + sumNumArrayStab + "\n"); //Show the new Sum of the array
-                }
-
-                
             }
      /* Question 4: */
             //You are given a string and your task is to sort the given string in decreasing order of frequency of occurrence of each character.
@@ -187,6 +154,46 @@ namespace First_Assignment_Group5
 
             //public bool ContainsDuplicate(char[] arr, int k)
 
+        }
+
+        static bool minSum(int[] newNumArrStab, int nStab) 
+        {
+            bool cheat = false;
+            int sumNewArrayStab = newNumArrStab[0];
+            for (int i = 1; i < nStab; i++) //For loop to traverse all elements of the array 
+            {
+                if (newNumArrStab[i] < newNumArrStab[i - 1]) //Check if array is in ascending order
+                {
+                    cheat = true;
+                    break;
+                }
+                else
+                {
+                    if (newNumArrStab[i] == newNumArrStab[i - 1]) //check if the current number in array is same as the previous number
+                    {
+                        int j = i;
+                        while (j < nStab && newNumArrStab[j] <= newNumArrStab[j - 1]) // for each number in the array check if it is less than or equal to the previous number, if yes, then increment the current number by one to make it next in sequence
+                        {
+                            newNumArrStab[j] = newNumArrStab[j] + 1; //Increment the number in array if it is same as the previous number
+                            j++;
+                        }
+
+                    }
+                }
+                sumNewArrayStab += newNumArrStab[i]; //Find sum of the new array
+            }
+
+            if (cheat==false)
+            {
+                Console.WriteLine("\n\n");
+                for (int i = 0; i < nStab; i++) //For loop to display all numbers in the updated array along with their position in the array.
+                {
+                    Console.WriteLine("The number in new array at position " + i + " is " + newNumArrStab[i]);
+
+                }
+                Console.WriteLine("\n\nThe sum of the array elemets is " + sumNewArrayStab + "\n"); //Show the new Sum of the array
+            }
+            return cheat;
         }
     }
 }

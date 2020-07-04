@@ -6,7 +6,7 @@ namespace First_Assignment_Group5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("First_Assignment_Group5 - Neelima, Eric and Rameez");
 
     /* Question 1: */
             //Professor Agrawal receives an array of integer points sorted in ascending order, the task is to find the initial and final index of 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace First_Assignment_Group5
 {
@@ -8,7 +9,7 @@ namespace First_Assignment_Group5
         {
             Console.WriteLine("First_Assignment_Group5 - Neelima, Eric and Rameez");
 
-    /* Question 1: */
+     /* Question 1: */
             //Professor Agrawal receives an array of integer points sorted in ascending order, the task is to find the initial and final index of 
             //a given target point’s value. If the target point value is not found in the array of integers, return [-1, -1]
             //The professor had to leave for a conference at short notice and asked you to complete the task for him.He instructed you to limit the time 
@@ -53,8 +54,76 @@ namespace First_Assignment_Group5
 
             //Time Complexity: O(n)
             //public static int minSum(int[] arr)
+            Console.WriteLine("Solution for Question 3 :");
+            Console.WriteLine("Enter the number of elements in the array"); 
+            int nStab = Convert.ToInt32(Console.ReadLine()); //Getting the size of the integer array.
+            int sumNumArrayStab = 0; //Initializing sum of the array elements as zero.
+            bool cheat = false; //Variable to check if the array is in ascending order.
+            if (nStab < 2) // Specifying condition to enter at least 2 number in the array.
+            {
+                Console.WriteLine("Minimum array length should be geater than or equal to 2.");
+            }
+            else //enter this code when the array lenght is more geater than or equal to 2.
+            {
+                int[] numberArrayStab = new int[nStab];
 
+                for (int i = 0; i < nStab; i++) //For loop to enter all numbers in the array.
+                {
+                    Console.WriteLine("Enter the number at position " + i);
+                    numberArrayStab[i] = Convert.ToInt32(Console.ReadLine());
+                    sumNumArrayStab += numberArrayStab[i]; //Finding the sum of the array
+                }
 
+                Console.WriteLine("\nThe sum of the array elemets is " + sumNumArrayStab); //Show the Sum of the array.
+
+                Console.WriteLine("\nLength of numberArrayStab =" + numberArrayStab.Length +"\n"); //Show the Length of the array.
+
+                for (int i = 0; i < nStab; i++) //For loop to display all numbers in the array along with their position in the array.
+                {
+                    Console.WriteLine("The number in old array at position " + i + " is " + numberArrayStab[i]);
+
+                }
+                sumNumArrayStab = numberArrayStab[0];
+                for (int i = 1; i < nStab; i++) //For loop to traverse all elements of the array 
+                {
+                    if (numberArrayStab[i] < numberArrayStab[i - 1]) //Check if array is in ascending order
+                    {
+                        cheat = true;
+                        break;
+                    }
+                    else
+                    { 
+                    if (numberArrayStab[i] == numberArrayStab[i - 1]) //check if the current number in array is same as the previous number
+                        {
+                        int j = i;
+                        while (j < nStab && numberArrayStab[j] <= numberArrayStab[j - 1]) // for each number in the array check if it is less than or equal to the previous number, if yes, then increment the current number by one to make it next in sequence
+                        {
+                            numberArrayStab[j] = numberArrayStab[j] + 1; //Increment the number in array if it is same as the previous number
+                            j++;
+                        }
+                      
+                    }                      
+                    }
+                    sumNumArrayStab += numberArrayStab[i]; //Find sum of the new array
+                }
+
+                if (cheat)
+                {
+                    Console.WriteLine("\nYou tried to cheat, your array is not sorted in ascending order."); //Display if the array is not in ascending order.
+                }
+                else 
+                {
+                    Console.WriteLine("\n\n");
+                    for (int i = 0; i < nStab; i++) //For loop to display all numbers in the updated array along with their position in the array.
+                    {
+                        Console.WriteLine("The number in new array at position " + i + " is " + numberArrayStab[i]);
+
+                    }
+                    Console.WriteLine("\n\nThe sum of the array elemets is " + sumNumArrayStab + "\n"); //Show the new Sum of the array
+                }
+
+                
+            }
      /* Question 4: */
             //You are given a string and your task is to sort the given string in decreasing order of frequency of occurrence of each character.
             //Example 1: 

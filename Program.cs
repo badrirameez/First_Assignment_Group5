@@ -31,7 +31,40 @@ namespace First_Assignment_Group5
 
                 //public int[] targetRange(int[] marks, int target)
                 Console.WriteLine("\nSolution for Question 1 :");
+ 
+                int x;
+                // Dictionaries 
+                Dictionary<int, int> numbersDictionary = new Dictionary<int, int>();
 
+                for (int i = 0; i < 10; i++)
+                {
+                    int num = i + 1;
+                    Console.WriteLine("Enter marks for student number " + num + " : ");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    numbersDictionary.Add(i, x);
+                }
+
+                Console.WriteLine("\nNumber of Elements in the marks dictionary = " + numbersDictionary.Count());
+                Console.WriteLine("\nEnter a Number to find in the marks Dictionary : ");
+                int y = Convert.ToInt32(Console.ReadLine());
+
+                if (numbersDictionary.ContainsValue(y))
+                {
+                    for (int index = 0; index < numbersDictionary.Count(); index++)
+                    {
+
+                        if (numbersDictionary.ElementAt(index).Value == y)
+                        {
+                            Console.WriteLine("The index for value " + y + " is " + numbersDictionary.ElementAt(index).Key);
+                        }
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Marks " + y + "  NOT found in the Dictionary");
+                    Console.WriteLine("The index for value " + y + " is -1");
+                }
 
             }
             else if (qNo == 2)

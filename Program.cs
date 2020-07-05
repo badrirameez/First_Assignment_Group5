@@ -10,8 +10,8 @@ namespace First_Assignment_Group5
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("First_Assignment_Group5 - Neelima, Eric and Rameez");
-            Console.WriteLine("Enter the Problem number for which you want to see the solution : " );
+            Console.WriteLine("\nFirst_Assignment_Group5 - Neelima, Eric and Rameez");
+            Console.WriteLine("\nEnter the Problem number(1/2/3/4/5/6) for which you want to see the solution : " );
             int qNo=Convert.ToInt32(Console.ReadLine());
             if (qNo == 1)
             {
@@ -30,7 +30,7 @@ namespace First_Assignment_Group5
                 //Note: The algorithm’s runtime complexity must be O(n).
 
                 //public int[] targetRange(int[] marks, int target)
-                Console.WriteLine("Solution for Question 1 :");
+                Console.WriteLine("\nSolution for Question 1 :");
 
 
             }
@@ -47,7 +47,7 @@ namespace First_Assignment_Group5
                 //Note: Time complexity should be O(n) where n is the length of string
                 //Hint: Create your own split and reverse function.
                 //Public static string StringReverse(string s)
-                Console.WriteLine("Solution for Question 2 :");
+                Console.WriteLine("\nSolution for Question 2 :");
             }
             else if (qNo == 3)
             {
@@ -65,7 +65,7 @@ namespace First_Assignment_Group5
 
                 //Time Complexity: O(n)
                 //public static int minSum(int[] arr)
-                Console.WriteLine("Solution for Question 3 :");
+                Console.WriteLine("\nSolution for Question 3 :");
                 Console.WriteLine("Enter the number of elements in the array");
                 int nStab = Convert.ToInt32(Console.ReadLine()); //Getting the size of the integer array.
                 int sumNumArrayStab = 0; //Initializing sum of the array elements as zero.
@@ -118,7 +118,7 @@ namespace First_Assignment_Group5
 
                 //Note: The solution must use a dictionary as the primary data structure.
                 //public static string FreqSort(string s)
-                Console.WriteLine("Solution for Question 4 :");
+                Console.WriteLine("\nSolution for Question 4 :");
                 Console.WriteLine("Enter the String : "); 
                 string str = Convert.ToString(Console.ReadLine()); // get the string as input
 
@@ -151,7 +151,7 @@ namespace First_Assignment_Group5
 
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
-                Console.WriteLine("Solution for Question 5 :");
+                Console.WriteLine("\nSolution for Question 5 :");
             }
             else if (qNo == 6)
             {
@@ -176,14 +176,38 @@ namespace First_Assignment_Group5
                 //Hint : You can make use of a dictionary to obtain the required time complexity.
 
                 //public bool ContainsDuplicate(char[] arr, int k)
-                Console.WriteLine("Solution for Question 6 :");
+
+                Console.WriteLine("\nSolution for Question 6 : \n");
+                Console.WriteLine("Enter the number of characters in the array : "); //Get the number of characters to insert in the array.
+                int nChar = Convert.ToInt32(Console.ReadLine()); 
+                
+                char[] arrChar = new char[nChar]; //declaring the character array
+
+                for (int i = 0; i < nChar; i++) //For loop to enter all characters in the array.
+                {
+                    Console.WriteLine("Enter the Character at position " + i);
+                    arrChar[i] = Convert.ToChar(Console.ReadLine());
+                }
+                Console.WriteLine("\nEnter the constant \"K\" : "); //Get the "K" Value from the user
+                int k = Convert.ToInt32(Console.ReadLine());
+
+                bool soln = ContainsDuplicate(arrChar, k); //Call the method to find out whther the array and k satisfy the given condition by passing the array and the constant to it.
+                if (soln)  //Display the result
+                {
+                    Console.WriteLine("\nThe char repeats itself in the given range."); 
+                }
+                else
+                {
+                    Console.WriteLine("\nThe char does not repeats itself in the given range.");
+                }
+
             }
             else {
                 Console.WriteLine("Please enter a number from 1 to 6 (inclusive) ");
             }
             }
 
-        public static bool minSum(int[] newNumArrStab, int nStab) 
+        public static bool minSum(int[] newNumArrStab, int nStab) //method fo solution 3
         {
             bool cheat = false;
             int sumNewArrayStab = newNumArrStab[0];
@@ -223,7 +247,7 @@ namespace First_Assignment_Group5
             return cheat;
         }
 
-        public static string FreqSort(string s)
+        public static string FreqSort(string s) //Method for solution 4
         {
             Dictionary<char, int> d = new Dictionary<char, int>(); //Creating a dictionary to store the character and its frequency.
             foreach (char c in s) //foreach character in the string add the frequency in the dictionary.
@@ -248,6 +272,31 @@ namespace First_Assignment_Group5
                     sb.Append(pair.Key); //Append each key based on value.
             }
             return sb.ToString(); //returm the sorted string.
+        }
+
+        static public bool ContainsDuplicate(char[] charArr, int k) //method for solution 6
+        {
+            Dictionary<char, int> dupChkArr = new Dictionary<char, int>(); // dictionary to store char value and last index as key value pair for each distinct char value in array
+
+            for (int i = 0; i < charArr.Length; i++) // loop to traverse through the entered array
+            {
+                if (dupChkArr.ContainsKey(charArr[i])) //condition to check if the char in the array already exists in the dict as the key 
+                {
+                    if (i - dupChkArr[charArr[i]] <= k) // check if the difference of the current position and old position of the char is less than or equal to the constant "k"
+                    {
+                        return true; //Satisfies the condition hence return to as the result.
+                    }
+                    else
+                    {
+                        dupChkArr[charArr[i]] = i; // if the difference of the current position and old position of the char is more the constant "k", update the current position in the dictionary.
+                    }
+                }
+                else 
+                {
+                    dupChkArr.Add(charArr[i], i); // if the char doesnt exist in the dictionary then add it along with it's current position
+                }
+            }
+            return false;// if ther are no duplicate chars within the range then just return false
         }
     }
 }

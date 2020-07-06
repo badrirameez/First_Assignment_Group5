@@ -35,7 +35,7 @@ namespace First_Assignment_Group5
                 // Dictionaries 
                 Dictionary<int, int> numbersDictionary = new Dictionary<int, int>();
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 10; i++) // loop to read marks into the dictionary
                 {
                     int num = i + 1;
                     Console.WriteLine("Enter marks for student number " + num + " : ");
@@ -45,11 +45,11 @@ namespace First_Assignment_Group5
 
                 Console.WriteLine("\nNumber of Elements in the marks dictionary = " + numbersDictionary.Count());
                 Console.WriteLine("\nEnter a Number to find in the marks Dictionary : ");
-                int y = Convert.ToInt32(Console.ReadLine());
+                int y = Convert.ToInt32(Console.ReadLine()); 
 
-                if (numbersDictionary.ContainsValue(y))
+                if (numbersDictionary.ContainsValue(y)) // condition to verify if the number exists in the dictionary
                 {
-                    for (int index = 0; index < numbersDictionary.Count(); index++)
+                    for (int index = 0; index < numbersDictionary.Count(); index++) // loop to find each occurance of y
                     {
 
                         if (numbersDictionary.ElementAt(index).Value == y)
@@ -59,7 +59,7 @@ namespace First_Assignment_Group5
 
                     }
                 }
-                else
+                else // if the given number does not exist in the dictionary
                 {
                     Console.WriteLine("Marks " + y + "  NOT found in the Dictionary");
                     Console.WriteLine("The index for value " + y + " is -1");
@@ -191,14 +191,14 @@ namespace First_Assignment_Group5
                 Dictionary<int, int> dic1 = new Dictionary<int, int>();
                 Dictionary<int, int> dic2 = new Dictionary<int, int>();
                 int x;
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++) // loop to read numbers into the first dictionary
                 {
                     int num = i + 1;
                     Console.WriteLine("Enter numbers for first dictionary " + num + " : ");
                     x = Convert.ToInt32(Console.ReadLine());
                     dic1.Add(i, x);
                 }
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++) // loop to read numbers into the second dictionary
                 {
                     int num = i + 1;
                     Console.WriteLine("\nEnter numbers for second dictionary " + num + " : ");
@@ -206,9 +206,9 @@ namespace First_Assignment_Group5
                     dic2.Add(i, x);
                 }
 
-                Intersect1(dic1, dic2);
+                Intersect1(dic1, dic2); // calling method 1
 
-                Intersect2(dic1, dic2);
+                Intersect2(dic1, dic2); // calling method 2
             }
             else if (qNo == 6)
             {

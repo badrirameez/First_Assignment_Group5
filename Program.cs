@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
 
@@ -11,8 +10,8 @@ namespace First_Assignment_Group5
         static void Main(string[] args)
         {
             Console.WriteLine("\nFirst_Assignment_Group5 - Neelima, Eric and Rameez");
-            Console.WriteLine("\nEnter the Problem number(1/2/3/4/5/6) for which you want to see the solution : " );
-            int qNo=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nEnter the Problem number(1/2/3/4/5/6) for which you want to see the solution : ");
+            int qNo = Convert.ToInt32(Console.ReadLine());
             if (qNo == 1)
             {
                 /* Question 1: */
@@ -31,8 +30,9 @@ namespace First_Assignment_Group5
 
                 //public int[] targetRange(int[] marks, int target)
                 Console.WriteLine("\nSolution for Question 1 :");
- 
+
                 int x;
+                // Dictionaries 
                 Dictionary<int, int> numbersDictionary = new Dictionary<int, int>();
 
                 for (int i = 0; i < 10; i++)
@@ -80,6 +80,10 @@ namespace First_Assignment_Group5
                 //Hint: Create your own split and reverse function.
                 //Public static string StringReverse(string s)
                 Console.WriteLine("\nSolution for Question 2 :");
+                string str = "University of South Florida";
+               //string str = "ca ca";
+               
+                Console.WriteLine("\nThis is how the string looks like after reversing each word : \""+ StringReverse(str)+"\"");
             }
             else if (qNo == 3)
             {
@@ -127,7 +131,7 @@ namespace First_Assignment_Group5
 
                     }
 
-                    cheat = minSum(numberArrayStab, nStab); //call Method to make the array elements distinct by increasing each value as needed and find the sum
+                    cheat = MinSum(numberArrayStab, nStab); //call Method to make the array elements distinct by increasing each value as needed and find the sum
                     if (cheat)
                     {
                         Console.WriteLine("\nYou tried to cheat, your array is not sorted in ascending order."); //Display if the array is not in ascending order.
@@ -151,7 +155,7 @@ namespace First_Assignment_Group5
                 //Note: The solution must use a dictionary as the primary data structure.
                 //public static string FreqSort(string s)
                 Console.WriteLine("\nSolution for Question 4 :");
-                Console.WriteLine("Enter the String : "); 
+                Console.WriteLine("Enter the String : ");
                 string str = Convert.ToString(Console.ReadLine()); // get the string as input
 
                 Console.WriteLine("The string sorted based on frequency of occurrence of each character is \"" + FreqSort(str) + "\""); //Calling the method to sort the string in decreasing order of frequency of characters
@@ -184,28 +188,6 @@ namespace First_Assignment_Group5
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
                 Console.WriteLine("\nSolution for Question 5 :");
-
-                Dictionary<int, int> dic1 = new Dictionary<int, int>();
-                Dictionary<int, int> dic2 = new Dictionary<int, int>();
-                int x;
-                for (int i = 0; i < 5; i++)
-                {
-                    int num = i + 1;
-                    Console.WriteLine("Enter numbers for first dictionary " + num + " : ");
-                    x = Convert.ToInt32(Console.ReadLine());
-                    dic1.Add(i, x);
-                }
-                for (int i = 0; i < 5; i++)
-                {
-                    int num = i + 1;
-                    Console.WriteLine("\nEnter numbers for second dictionary " + num + " : ");
-                    x = Convert.ToInt32(Console.ReadLine());
-                    dic2.Add(i, x);
-                }
-
-                Intersect1(dic1, dic2);
-
-                Intersect2(dic1, dic2);
             }
             else if (qNo == 6)
             {
@@ -233,8 +215,8 @@ namespace First_Assignment_Group5
 
                 Console.WriteLine("\nSolution for Question 6 : \n");
                 Console.WriteLine("Enter the number of characters in the array : "); //Get the number of characters to insert in the array.
-                int nChar = Convert.ToInt32(Console.ReadLine()); 
-                
+                int nChar = Convert.ToInt32(Console.ReadLine());
+
                 char[] arrChar = new char[nChar]; //declaring the character array
 
                 for (int i = 0; i < nChar; i++) //For loop to enter all characters in the array.
@@ -248,7 +230,7 @@ namespace First_Assignment_Group5
                 bool soln = ContainsDuplicate(arrChar, k); //Call the method to find out whther the array and k satisfy the given condition by passing the array and the constant to it.
                 if (soln)  //Display the result
                 {
-                    Console.WriteLine("\nThe char repeats itself in the given range."); 
+                    Console.WriteLine("\nThe char repeats itself in the given range.");
                 }
                 else
                 {
@@ -256,12 +238,59 @@ namespace First_Assignment_Group5
                 }
 
             }
-            else {
+            else
+            {
                 Console.WriteLine("Please enter a number from 1 to 6 (inclusive) ");
             }
+        }
+        public static string StringReverse(String str) //method for solution 2  
+        {
+            char[] chrArray = str.ToCharArray();
+            int temp = 0;
+            for (int i = 0; i <= chrArray.Length - 1; i++) //for loop to iterate up to end of the string by each character.
+            {
+                int count = temp; //declaring temporary variables for supporting the logic.
+                int wordNum = 1; //tracks the number of words in the string.
+                if (chrArray[i] == ' ' || i == chrArray.Length - 1) //to extract each word before a space(" ").
+                {
+                    if (i == chrArray.Length - 1) //enter condition for the last word
+                    {
+                        for (int j = i; j >= temp; j--)
+                        {
+                            if (wordNum <= (i - temp) / 2) //Reverse the last word of the string.
+                            {
+                                char tempWord = chrArray[count];
+                                chrArray[count] = chrArray[j];
+                                chrArray[j] = tempWord;
+                                count++;
+                                wordNum++;
+                            }
+                        }
+                    }
+                    else
+                    { //enter condition for all words prior to the last word.
+                        for (int j = i - 1; j >= temp; j--)
+                        {
+
+                            if (wordNum <= (i - temp) / 2) //Reverse the word prior to a space
+                            {
+                                char tempWord = chrArray[count];
+                                chrArray[count] = chrArray[j];
+                                chrArray[j] = tempWord;
+                                count++;
+                                wordNum++;
+                            }
+                        }
+                    }
+                    temp = i + 1;
+                }
+
             }
 
-        public static bool minSum(int[] newNumArrStab, int nStab) //method fo solution 3
+            string newLine = new string(chrArray); //convert the updated character array to a string.
+            return newLine; //return the updated String.
+        }
+        public static bool MinSum(int[] newNumArrStab, int nStab) //method fo solution 3
         {
             bool cheat = false;
             int sumNewArrayStab = newNumArrStab[0];
@@ -288,7 +317,7 @@ namespace First_Assignment_Group5
                 sumNewArrayStab += newNumArrStab[i]; //Find sum of the new array.
             }
 
-            if (cheat==false)
+            if (cheat == false)
             {
                 Console.WriteLine("\n\n");
                 for (int i = 0; i < nStab; i++) //For loop to display all numbers in the updated array along with their position in the array.
@@ -300,7 +329,6 @@ namespace First_Assignment_Group5
             }
             return cheat;
         }
-
         public static string FreqSort(string s) //Method for solution 4
         {
             Dictionary<char, int> d = new Dictionary<char, int>(); //Creating a dictionary to store the character and its frequency.
@@ -327,8 +355,7 @@ namespace First_Assignment_Group5
             }
             return sb.ToString(); //returm the sorted string.
         }
-
-        static public bool ContainsDuplicate(char[] charArr, int k) //method for solution 6
+        public static bool ContainsDuplicate(char[] charArr, int k) //method for solution 6
         {
             Dictionary<char, int> dupChkArr = new Dictionary<char, int>(); // dictionary to store char value and last index as key value pair for each distinct char value in array
 
@@ -345,7 +372,7 @@ namespace First_Assignment_Group5
                         dupChkArr[charArr[i]] = i; // if the difference of the current position and old position of the char is more the constant "k", update the current position in the dictionary.
                     }
                 }
-                else 
+                else
                 {
                     dupChkArr.Add(charArr[i], i); // if the char doesnt exist in the dictionary then add it along with it's current position
                 }
@@ -353,29 +380,6 @@ namespace First_Assignment_Group5
             return false;// if ther are no duplicate chars within the range then just return false
         }
 
-        public static void Intersect1(Dictionary<int, int> firstDictionary, Dictionary<int, int> secondDictionary)
-        {
-            HashSet<int> commonValues = new HashSet<int>(firstDictionary.Values);
-            commonValues.IntersectWith(secondDictionary.Values);
-            var commonResultSet =
-                firstDictionary
-                .Where(x => commonValues.Contains(x.Value))
-                .Select(x => x.Value)
-                .ToList();
-            Console.WriteLine("\n The First intersection result is :  ");
-            commonResultSet.ForEach(Console.WriteLine);
-        }
-        public static void Intersect2(Dictionary<int, int> firstDictionary, Dictionary<int, int> secondDictionary)
-        {
-            HashSet<int> commonValues = new HashSet<int>(secondDictionary.Values);
-            commonValues.IntersectWith(firstDictionary.Values);
-            var commonResultSet =
-                secondDictionary
-                .Where(x => commonValues.Contains(x.Value))
-                .Select(x => x.Value)
-                .ToList();
-            Console.WriteLine("\n The Second intersection result is :  ");
-            commonResultSet.ForEach(Console.WriteLine);
-        }
+        
     }
 }

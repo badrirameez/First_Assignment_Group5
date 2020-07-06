@@ -188,6 +188,27 @@ namespace First_Assignment_Group5
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
                 //public static int[] Intersect1(int[] nums1, int[] nums2)
                 Console.WriteLine("\nSolution for Question 5 :");
+                Dictionary<int, int> dic1 = new Dictionary<int, int>();
+                Dictionary<int, int> dic2 = new Dictionary<int, int>();
+                int x;
+                for (int i = 0; i < 5; i++)
+                {
+                    int num = i + 1;
+                    Console.WriteLine("Enter numbers for first dictionary " + num + " : ");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    dic1.Add(i, x);
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    int num = i + 1;
+                    Console.WriteLine("\nEnter numbers for second dictionary " + num + " : ");
+                    x = Convert.ToInt32(Console.ReadLine());
+                    dic2.Add(i, x);
+                }
+
+                Intersect1(dic1, dic2);
+
+                Intersect2(dic1, dic2);
             }
             else if (qNo == 6)
             {
@@ -354,6 +375,31 @@ namespace First_Assignment_Group5
                     sb.Append(pair.Key); //Append each key based on value.
             }
             return sb.ToString(); //returm the sorted string.
+        }
+
+        public static void Intersect1(Dictionary<int, int> firstDictionary, Dictionary<int, int> secondDictionary) //method 1 for solution 5
+        {
+            HashSet<int> commonValues = new HashSet<int>(firstDictionary.Values);
+            commonValues.IntersectWith(secondDictionary.Values);
+            var commonResultSet =
+                firstDictionary
+                .Where(x => commonValues.Contains(x.Value))
+                .Select(x => x.Value)
+                .ToList();
+            Console.WriteLine("\n The First intersection result is :  ");
+            commonResultSet.ForEach(Console.WriteLine);
+        }
+        public static void Intersect2(Dictionary<int, int> firstDictionary, Dictionary<int, int> secondDictionary)//method 2 for solution 5
+        {
+            HashSet<int> commonValues = new HashSet<int>(secondDictionary.Values);
+            commonValues.IntersectWith(firstDictionary.Values);
+            var commonResultSet =
+                secondDictionary
+                .Where(x => commonValues.Contains(x.Value))
+                .Select(x => x.Value)
+                .ToList();
+            Console.WriteLine("\n The Second intersection result is :  ");
+            commonResultSet.ForEach(Console.WriteLine);
         }
         public static bool ContainsDuplicate(char[] charArr, int k) //method for solution 6
         {
